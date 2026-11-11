@@ -1,0 +1,64 @@
+
+<div class="container">
+
+  <a routerLink="/" class="back-button">
+    ← Voltar para a Pokédex
+  </a>
+
+  <p *ngIf="carregando">Carregando detalhes...</p>
+
+  <p *ngIf="erro">{{ erro }}</p>
+
+  <div class="pokemon-detail" *ngIf="pokemon">
+
+    <header>
+      <h1>{{ pokemon.name | titlecase }}</h1>
+      <span>#{{ pokemon.id }}</span>
+    </header>
+
+    <div class="pokemon-content">
+
+      <div class="pokemon-image">
+        <img
+          [src]="pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default"
+          [alt]="pokemon.name"
+        >
+      </div>
+
+      <div class="pokemon-info">
+
+        <h2>Informações</h2>
+
+        <p>
+          <strong>Altura:</strong>
+          {{ pokemon.height / 10 }} m
+        </p>
+
+        <p>
+          <strong>Peso:</strong>
+          {{ pokemon.weight / 10 }} kg
+        </p>
+
+        <h2>Tipos</h2>
+
+        <div class="tag-container">
+          <span class="tag" *ngFor="let tipo of pokemon.types">
+            {{ tipo.type.name | titlecase }}
+          </span>
+        </div>
+
+        <h2>Habilidades</h2>
+
+        <div class="tag-container">
+          <span class="tag" *ngFor="let habilidade of pokemon.abilities">
+            {{ habilidade.ability.name | titlecase }}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
